@@ -1,0 +1,4 @@
+# Local database and the downloaded binary
+pb_data/
+pocketbase
+pocketbase.exe
