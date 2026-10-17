@@ -33,6 +33,7 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
+  AlertTriangle,
   Brain,
   Download,
   ExternalLink,
@@ -58,6 +59,24 @@ import { toast } from "sonner";
 // so only VITE_-prefixed variables are available, via import.meta.env)
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY ?? "");
 const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL ?? "gemini-flash-latest";
+
+// Turns a failed Gemini request into a warning shown on the course page.
+function aiErrorMessage(error: unknown) {
+  const status = (error as { status?: number })?.status;
+  if (!import.meta.env.VITE_GEMINI_API_KEY || status === 400 || status === 401 || status === 403) {
+    return "Sikertelen kérés: hibás vagy hiányzó Gemini API kulcs. Ellenőrizd a VITE_GEMINI_API_KEY értékét a .env fájlban, majd indítsd újra a klienst.";
+  }
+  if (status === 402) {
+    return "Sikertelen kérés: elfogyott a Gemini projekt kreditje. Tölts fel kreditet vagy állíts be fizetési módot az AI Studióban (https://ai.studio/projects).";
+  }
+  if (status === 429) {
+    return "Sikertelen kérés: elfogyott a Gemini API kerete, próbáld újra később.";
+  }
+  if (status === 404) {
+    return `Sikertelen kérés: a(z) "${GEMINI_MODEL}" modell nem elérhető. Állíts be másikat a VITE_GEMINI_MODEL változóval.`;
+  }
+  return "Sikertelen kérés a Gemini API felé, próbáld újra később.";
+}
 
 async function fetchFileAsBase64(url: string) {
   try {
@@ -91,6 +110,10 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
     });
 
     if (ai) {
+      if (!import.meta.env.VITE_GEMINI_API_KEY) {
+        return { record, summaryResult: null, flashcards: null, aiError: aiErrorMessage(null) };
+      }
+
       let fileList = [];
 
       for await (const file of record.files) {
@@ -153,10 +176,8 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
           const summaryResult = null;
           return { record, flashcards, summaryResult };
         } catch (error) {
-
-          const flashcards = null;
-          const summaryResult = null;
-          return { record, flashcards, summaryResult };
+          console.error(error);
+          return { record, flashcards: null, summaryResult: null, aiError: aiErrorMessage(error) };
         }
       }
 
@@ -175,11 +196,16 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
 
         const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
-        const result = await model.generateContent([prompt, ...fileList]);
+        try {
+          const result = await model.generateContent([prompt, ...fileList]);
 
-        const summaryResult = result.response.text();
-        const flashcards = null;
-        return { record, summaryResult, flashcards };
+          const summaryResult = result.response.text();
+          const flashcards = null;
+          return { record, summaryResult, flashcards };
+        } catch (error) {
+          console.error(error);
+          return { record, summaryResult: null, flashcards: null, aiError: aiErrorMessage(error) };
+        }
       }
     }
 
@@ -355,6 +381,18 @@ export default function Courses({ loaderData }: Route.ComponentProps) {
           </div>
           <hr />
         </>
+      )}
+
+      {loaderData.aiError ? (
+        <div
+          role="alert"
+          className="mx-4 my-2 flex items-start gap-2 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900"
+        >
+          <AlertTriangle className="mt-0.5 size-4 shrink-0" />
+          <span>{loaderData.aiError}</span>
+        </div>
+      ) : (
+        ""
       )}
 
       {loaderData.record &&
