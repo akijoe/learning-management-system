@@ -16,7 +16,7 @@ migrate((app) => {
     "id": "text95021074",
     "max": 0,
     "min": 0,
-    "name": "student_code",
+    "name": "neptun_code",
     "pattern": "",
     "presentable": false,
     "primaryKey": false,

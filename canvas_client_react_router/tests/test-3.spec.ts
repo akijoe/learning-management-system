@@ -5,9 +5,9 @@ test('everything', async ({ page }) => {
   test.setTimeout(120_000)
 
   await page.goto('http://localhost:5173/login')
-  await page.getByRole('textbox', { name: 'nev@example.com' }).click();
-  await page.getByRole('textbox', { name: 'nev@example.com' }).fill('test2@example.com');
-  await page.getByRole('textbox', { name: 'nev@example.com' }).press('Tab');
+  await page.getByRole('textbox', { name: 'neptunkód@inf.elte.hu' }).click();
+  await page.getByRole('textbox', { name: 'neptunkód@inf.elte.hu' }).fill('test2@example.com');
+  await page.getByRole('textbox', { name: 'neptunkód@inf.elte.hu' }).press('Tab');
   await page.getByRole('textbox', { name: 'Jelszó' }).fill('asdf1234');
   await page.getByRole('button', { name: 'Bejelentkezés' }).click();
 
@@ -79,9 +79,9 @@ test('everything', async ({ page }) => {
   await expect(page.getByText('BejelentkezésÍrd be az email-ed és a jelszavadEmailJelszóBejelentkezésCsak az')).toBeVisible();
 
   
-  await page.getByRole('textbox', { name: 'nev@example.com' }).click();
-  await page.getByRole('textbox', { name: 'nev@example.com' }).fill('teacher2@example.com');
-  await page.getByRole('textbox', { name: 'nev@example.com' }).press('Tab');
+  await page.getByRole('textbox', { name: 'neptunkód@inf.elte.hu' }).click();
+  await page.getByRole('textbox', { name: 'neptunkód@inf.elte.hu' }).fill('teacher2@example.com');
+  await page.getByRole('textbox', { name: 'neptunkód@inf.elte.hu' }).press('Tab');
   await page.getByRole('textbox', { name: 'Jelszó' }).fill('asdf1234');
   await page.getByRole('button', { name: 'Bejelentkezés' }).click();
 

@@ -58,7 +58,7 @@ export function LoginForm({
                   onChange={(e) => setEmail(e.target.value)}
                   id="identity"
                   type="email"
-                  placeholder="nev@example.com"
+                  placeholder="neptunkód@inf.elte.hu"
                   required
                 />
               </div>
@@ -82,7 +82,14 @@ export function LoginForm({
             <div className="mt-4 text-center text-sm">
               <Info className="inline-block mr-1 w-4 h-4" />
               Csak az adminisztrátor tud fiókot létrehozni. Ha nincs fiókja vagy
-              nem tud bejelentkezni, forduljon az adminisztrátorhoz.
+              nem tud bejelentkezni, forduljon az{" "}
+              <a
+                href="http://qter.elte.hu/"
+                target="_blank"
+                className="text-blue-700"
+              >
+                Oktatási Igazgatósághoz.
+              </a>
               <p className="text-red-600 text-2xl">
                 {errormsg ? "Sikertelen bejelentkezés" : ""}
               </p>

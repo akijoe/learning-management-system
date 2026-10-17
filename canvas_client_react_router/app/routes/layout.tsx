@@ -40,76 +40,76 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
       isTeacher: pb.authStore.record.role == "teacher",
     };
 
-    if (user.expand?.courses && user.expand?.completed_courses) {
-      const merge = user.expand.courses.concat(user.expand.completed_courses);
+    // a user with no (completed) courses yet has no expand entry for them
+    const courses = user.expand?.courses ?? [];
+    const completed_courses = user.expand?.completed_courses ?? [];
 
-      let mycourses: Course[] = [];
+    let mycourses: Course[] = [];
 
-      // nem teljesített
-      for (const c of user.expand.courses) {
-        const element = {
-          id: c.id,
-          course_name: c.course_name,
-          credits: c.credits,
-          course_type: c.course_type,
-          completed: false,
-          is_mandatory: c.mandatory_in_spec.includes(user.specialisation),
-        };
+    // nem teljesített
+    for (const c of courses) {
+      const element = {
+        id: c.id,
+        course_name: c.course_name,
+        credits: c.credits,
+        course_type: c.course_type,
+        completed: false,
+        is_mandatory: c.mandatory_in_spec.includes(user.specialisation),
+      };
 
-        mycourses.push(element);
-      }
-
-      // teljesített
-      for (const c of user.expand.completed_courses) {
-        const element = {
-          id: c.id,
-          course_name: c.course_name,
-          credits: c.credits,
-          course_type: c.course_type,
-          completed: true,
-          is_mandatory: true,
-        };
-
-        mycourses.push(element);
-      }
-
-      // advancements
-
-      let számszab = 0,
-        mat = 0,
-        infszab = 0,
-        egyéb = 0,
-        szám = 0,
-        inf = 0;
-
-      for (const cc of user.expand?.completed_courses) {
-        const b = !cc.mandatory_in_spec.includes(user.specialisation);
-
-        if (cc.course_type == "inf") {
-          inf += cc.credits;
-          if (b) infszab += cc.credits;
-        } else if (cc.course_type == "mat") {
-          mat += cc.credits;
-        } else if (cc.course_type == "szám") {
-          szám += cc.credits;
-          if (b) számszab += cc.credits;
-        } else if (cc.course_type == "egyéb") {
-          egyéb += cc.credits;
-        }
-      }
-
-      const advancements = [
-        szám,
-        mat,
-        inf,
-        egyéb,
-        user.specialisation,
-        számszab,
-        infszab,
-      ];
-
-      return { mycourses, myrecord, advancements };
+      mycourses.push(element);
     }
+
+    // teljesített
+    for (const c of completed_courses) {
+      const element = {
+        id: c.id,
+        course_name: c.course_name,
+        credits: c.credits,
+        course_type: c.course_type,
+        completed: true,
+        is_mandatory: true,
+      };
+
+      mycourses.push(element);
+    }
+
+    // advancements
+
+    let számszab = 0,
+      mat = 0,
+      infszab = 0,
+      egyéb = 0,
+      szám = 0,
+      inf = 0;
+
+    for (const cc of completed_courses) {
+      const b = !cc.mandatory_in_spec.includes(user.specialisation);
+
+      if (cc.course_type == "inf") {
+        inf += cc.credits;
+        if (b) infszab += cc.credits;
+      } else if (cc.course_type == "mat") {
+        mat += cc.credits;
+      } else if (cc.course_type == "szám") {
+        szám += cc.credits;
+        if (b) számszab += cc.credits;
+      } else if (cc.course_type == "egyéb") {
+        egyéb += cc.credits;
+      }
+    }
+
+    const advancements = [
+      szám,
+      mat,
+      inf,
+      egyéb,
+      user.specialisation,
+      számszab,
+      infszab,
+    ];
+
+    return { mycourses, myrecord, advancements };
   }
 
   return fake_list;

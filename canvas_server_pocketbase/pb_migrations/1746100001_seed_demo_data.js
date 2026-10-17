@@ -1,5 +1,5 @@
 /// <reference path="../pb_data/types.d.ts" />
-// Anonymized demo data. Every demo user's password is DEMO_PASSWORD, the
+// Demo data. Every demo user's password is DEMO_PASSWORD, the
 // superuser is admin@example.com / DEMO_ADMIN_PASSWORD. Course material PDFs
 // are read from ../pb_seed (next to pb_data).
 const DEMO_PASSWORD = "asdf1234"
@@ -8,7 +8,7 @@ const DEMO_ADMIN_PASSWORD = "admin12345"
 const DATA = {
   "courses": [
     {
-      "id": "LMS-SZGREG",
+      "id": "IP-18SZGREG",
       "course_name": "Számítógépes rendszerek",
       "course_type": "inf",
       "credits": 5,
@@ -27,7 +27,7 @@ const DATA = {
       ]
     },
     {
-      "id": "LMS-PROGEG",
+      "id": "IP-18PROGEG",
       "course_name": "Programozás",
       "course_type": "inf",
       "credits": 6,
@@ -44,7 +44,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-IMPROGEG",
+      "id": "IP-18IMPROGEG",
       "course_name": "Imperatív programozás",
       "course_type": "inf",
       "credits": 5,
@@ -61,7 +61,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-FUNPEG",
+      "id": "IP-18FUNPEG",
       "course_name": "Funkcionális programozás",
       "course_type": "inf",
       "credits": 5,
@@ -78,7 +78,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-MATAG",
+      "id": "IP-18MATAG",
       "course_name": "Matematikai alapok",
       "course_type": "mat",
       "credits": 4,
@@ -95,7 +95,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-TMKG",
+      "id": "IP-18TMKG",
       "course_name": "Egyetemi alapozó és tanulásmódszertani kurzus",
       "course_type": "egyéb",
       "credits": 1,
@@ -112,7 +112,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-PNYEG",
+      "id": "IP-18PNYEG",
       "course_name": "Programozási nyelvek",
       "course_type": "inf",
       "credits": 6,
@@ -129,7 +129,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-OEPROGEG",
+      "id": "IP-18OEPROGEG",
       "course_name": "Objektumelvű programozás",
       "course_type": "inf",
       "credits": 6,
@@ -143,12 +143,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-PROGEG"
+        "IP-18PROGEG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-WF1EG",
+      "id": "IP-18WF1EG",
       "course_name": "Web-fejlesztés",
       "course_type": "inf",
       "credits": 3,
@@ -162,12 +162,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-SZGREG"
+        "IP-18SZGREG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-AA1E",
+      "id": "IP-18AA1E",
       "course_name": "Algoritmusok és adatszerkezetek I EA",
       "course_type": "szám",
       "credits": 2,
@@ -181,8 +181,8 @@ const DATA = {
       ],
       "exams_maximum_attempts": 3,
       "prerequisites": [
-        "LMS-MATAG",
-        "LMS-AA1G"
+        "IP-18MATAG",
+        "IP-18AA1G"
       ],
       "exams": [
         "612c3y91335jx51",
@@ -190,7 +190,7 @@ const DATA = {
       ]
     },
     {
-      "id": "LMS-AA1G",
+      "id": "IP-18AA1G",
       "course_name": "Algoritmusok és adatszerkezetek I Gy",
       "course_type": "szám",
       "credits": 3,
@@ -204,13 +204,13 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-MATAG",
-        "LMS-PROGEG"
+        "IP-18MATAG",
+        "IP-18PROGEG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-DM1E",
+      "id": "IP-18DM1E",
       "course_name": "Diszkrét matematika I",
       "course_type": "mat",
       "credits": 2,
@@ -227,7 +227,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-DM1G",
+      "id": "IP-18DM1G",
       "course_name": "Diszkrét matematika I",
       "course_type": "mat",
       "credits": 2,
@@ -241,12 +241,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-MATAG"
+        "IP-18MATAG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-AN1E",
+      "id": "IP-18AN1E",
       "course_name": "Analízis I",
       "course_type": "mat",
       "credits": 2,
@@ -260,7 +260,7 @@ const DATA = {
       ],
       "exams_maximum_attempts": 2,
       "prerequisites": [
-        "LMS-MATAG"
+        "IP-18MATAG"
       ],
       "exams": [
         "w65413492299ifz",
@@ -268,7 +268,7 @@ const DATA = {
       ]
     },
     {
-      "id": "LMS-AN1G",
+      "id": "IP-18AN1G",
       "course_name": "Analízis I",
       "course_type": "mat",
       "credits": 2,
@@ -282,12 +282,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-MATAG"
+        "IP-18MATAG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-AA2E",
+      "id": "IP-18AA2E",
       "course_name": "Algoritmusok és adatszerkezetek II",
       "course_type": "szám",
       "credits": 2,
@@ -301,12 +301,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-AA1E"
+        "IP-18AA1E"
       ],
       "exams": []
     },
     {
-      "id": "LMS-AA2G",
+      "id": "IP-18AA2G",
       "course_name": "Algoritmusok és adatszerkezetek II",
       "course_type": "szám",
       "credits": 3,
@@ -320,12 +320,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-AA1E"
+        "IP-18AA1E"
       ],
       "exams": []
     },
     {
-      "id": "LMS-OPREG",
+      "id": "IP-18OPREG",
       "course_name": "Operációs rendszerek",
       "course_type": "inf",
       "credits": 3,
@@ -339,12 +339,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-SZGREG"
+        "IP-18SZGREG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-AB1E",
+      "id": "IP-18AB1E",
       "course_name": "Adatbázisok I",
       "course_type": "inf",
       "credits": 2,
@@ -358,12 +358,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-AA2E"
+        "IP-18AA2E"
       ],
       "exams": []
     },
     {
-      "id": "LMS-AB1G",
+      "id": "IP-18AB1G",
       "course_name": "Adatbázisok I",
       "course_type": "inf",
       "credits": 2,
@@ -377,12 +377,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-AA2E"
+        "IP-18AA2E"
       ],
       "exams": []
     },
     {
-      "id": "LMS-KPROGEG",
+      "id": "IP-18KPROGEG",
       "course_name": "Konkurrens programozás",
       "course_type": "inf",
       "credits": 3,
@@ -396,12 +396,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-PNYEG"
+        "IP-18PNYEG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-TKHE",
+      "id": "IP-18TKHE",
       "course_name": "Telekommunikációs hálózatok",
       "course_type": "inf",
       "credits": 2,
@@ -418,7 +418,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-TKHG",
+      "id": "IP-18TKHG",
       "course_name": "Telekommunikációs hálózatok",
       "course_type": "inf",
       "credits": 3,
@@ -432,12 +432,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-OEPROGEG"
+        "IP-18OEPROGEG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-MIAE",
+      "id": "IP-18MIAE",
       "course_name": "Mesterséges intelligencia",
       "course_type": "szám",
       "credits": 3,
@@ -451,12 +451,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-AA2E"
+        "IP-18AA2E"
       ],
       "exams": []
     },
     {
-      "id": "LMS-JIE",
+      "id": "IP-18JIE",
       "course_name": "Jogi ismeretek",
       "course_type": "egyéb",
       "credits": 3,
@@ -473,7 +473,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-PWMEG",
+      "id": "IP-18PWMEG",
       "course_name": "Innovatív vállalkozás menedzsment",
       "course_type": "egyéb",
       "credits": 3,
@@ -491,7 +491,7 @@ const DATA = {
       "exams": []
     },
     {
-      "id": "LMS-aEVALKEG",
+      "id": "IP-18aEVALKEG",
       "course_name": "Eseményvezérelt alkalmazások",
       "course_type": "inf",
       "credits": 5,
@@ -503,12 +503,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-OEPROGEG"
+        "IP-18OEPROGEG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-cWEBPROGEG",
+      "id": "IP-18cWEBPROGEG",
       "course_name": "Webprogramozás",
       "course_type": "inf",
       "credits": 4,
@@ -520,12 +520,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-WF1EG"
+        "IP-18WF1EG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-cPROGTEG",
+      "id": "IP-18cPROGTEG",
       "course_name": "Programozási technológia",
       "course_type": "inf",
       "credits": 5,
@@ -537,12 +537,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-OEPROGEG"
+        "IP-18OEPROGEG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-bPREG",
+      "id": "IP-18bPREG",
       "course_name": "Programozáselmélet Gy",
       "course_type": "szám",
       "credits": 3,
@@ -554,12 +554,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-MATAG"
+        "IP-18MATAG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-bPREE",
+      "id": "IP-18bPREE",
       "course_name": "Programozáselmélet EA",
       "course_type": "szám",
       "credits": 2,
@@ -571,14 +571,14 @@ const DATA = {
       ],
       "exams_maximum_attempts": 2,
       "prerequisites": [
-        "LMS-bPREG"
+        "IP-18bPREG"
       ],
       "exams": [
         "q2062ls2981alp2"
       ]
     },
     {
-      "id": "LMS-aDM2G",
+      "id": "IP-18aDM2G",
       "course_name": "Diszkrét matematika II",
       "course_type": "mat",
       "credits": 3,
@@ -591,12 +591,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-DM1E"
+        "IP-18DM1E"
       ],
       "exams": []
     },
     {
-      "id": "LMS-KVSZKBIZTE",
+      "id": "IP-24KVSZKBIZTE",
       "course_name": "Kiberbiztonság alapjai EA",
       "course_type": "szám",
       "credits": 4,
@@ -606,12 +606,12 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-WF1EG"
+        "IP-18WF1EG"
       ],
       "exams": []
     },
     {
-      "id": "LMS-KVPNY1EG",
+      "id": "IP-18KVPNY1EG",
       "course_name": "Programozási nyelvek (C++)",
       "course_type": "inf",
       "credits": 5,
@@ -621,7 +621,7 @@ const DATA = {
       ],
       "exams_maximum_attempts": 0,
       "prerequisites": [
-        "LMS-IMPROGEG"
+        "IP-18IMPROGEG"
       ],
       "exams": []
     }
@@ -634,11 +634,11 @@ const DATA = {
       "role": "student",
       "specialisation": "B",
       "courses": [
-        "LMS-aEVALKEG",
-        "LMS-MIAE"
+        "IP-18aEVALKEG",
+        "IP-18MIAE"
       ],
       "completed_courses": [
-        "LMS-TMKG"
+        "IP-18TMKG"
       ]
     },
     {
@@ -648,26 +648,26 @@ const DATA = {
       "role": "student",
       "specialisation": "C",
       "courses": [
-        "LMS-cPROGTEG",
-        "LMS-DM1E",
-        "LMS-WF1EG",
-        "LMS-FUNPEG",
-        "LMS-aDM2G",
-        "LMS-AN1E",
-        "LMS-AN1G",
-        "LMS-bPREG",
-        "LMS-bPREE"
+        "IP-18cPROGTEG",
+        "IP-18DM1E",
+        "IP-18WF1EG",
+        "IP-18FUNPEG",
+        "IP-18aDM2G",
+        "IP-18AN1E",
+        "IP-18AN1G",
+        "IP-18bPREG",
+        "IP-18bPREE"
       ],
       "completed_courses": [
-        "LMS-OPREG",
-        "LMS-cWEBPROGEG",
-        "LMS-TMKG",
-        "LMS-IMPROGEG",
-        "LMS-AA1E",
-        "LMS-AA1G",
-        "LMS-KVSZKBIZTE",
-        "LMS-KVPNY1EG",
-        "LMS-MATAG"
+        "IP-18OPREG",
+        "IP-18cWEBPROGEG",
+        "IP-18TMKG",
+        "IP-18IMPROGEG",
+        "IP-18AA1E",
+        "IP-18AA1G",
+        "IP-24KVSZKBIZTE",
+        "IP-18KVPNY1EG",
+        "IP-18MATAG"
       ]
     },
     {
@@ -695,12 +695,12 @@ const DATA = {
       "role": "teacher",
       "specialisation": "A",
       "courses": [
-        "LMS-KVSZKBIZTE",
-        "LMS-aDM2G"
+        "IP-24KVSZKBIZTE",
+        "IP-18aDM2G"
       ],
       "completed_courses": [
-        "LMS-aDM2G",
-        "LMS-bPREE"
+        "IP-18aDM2G",
+        "IP-18bPREE"
       ]
     }
   ],
@@ -781,7 +781,7 @@ const DATA = {
       "id": "ki9it7co5hq0n71",
       "days": 50,
       "semester": "24/25/2",
-      "location": "A épület 0.307",
+      "location": "Bólyai 0-307",
       "maximum_participants": 100,
       "participants": [],
       "results": [
@@ -863,7 +863,7 @@ const DATA = {
   "instances": [
     {
       "id": "ythlzcd625a75nq",
-      "course": "LMS-bPREE",
+      "course": "IP-18bPREE",
       "teacher": "TE4CH3",
       "students": [
         "KI28AH",
@@ -883,7 +883,7 @@ const DATA = {
     },
     {
       "id": "0i2we76b5b0m00k",
-      "course": "LMS-bPREE",
+      "course": "IP-18bPREE",
       "teacher": "253ja90q6aas4ld",
       "students": [
         "KI28AH",
@@ -901,7 +901,7 @@ const DATA = {
     },
     {
       "id": "vwm7s3hass6i34j",
-      "course": "LMS-WF1EG",
+      "course": "IP-18WF1EG",
       "teacher": "TE4CH3",
       "students": [],
       "description": "<h2>Web-fejlesztés</h2><p>A kurzus a kliensoldali webfejlesztés alapjait mutatja be: HTML, CSS és JavaScript, a DOM kezelése és az eseménykezelés.</p><h2>Követelmények</h2><ul><li>Félévközi beadandó feladat</li><li>Gyakorlati zárthelyi a félév végén</li></ul><p>A tananyag lent, a Fájlok között érhető el.</p>",
@@ -914,7 +914,7 @@ const DATA = {
     },
     {
       "id": "82y7x422l9h9md6",
-      "course": "LMS-AN1E",
+      "course": "IP-18AN1E",
       "teacher": "253ja90q6aas4ld",
       "students": [
         "s70x7ob3ydb172x"
@@ -929,7 +929,7 @@ const DATA = {
     },
     {
       "id": "8m087af5e0e97h1",
-      "course": "LMS-AA1G",
+      "course": "IP-18AA1G",
       "teacher": "TE4CH3",
       "students": [],
       "description": "<h2>Algoritmusok és adatszerkezetek I gyakorlat</h2><p>A gyakorlaton az előadáson tanult algoritmusokat (rendezések, verem, sor, láncolt listák, fák) feladatokon keresztül gyakoroljuk.</p><h2>Követelmények</h2><ul><li>Két zárthelyi dolgozat</li><li>Órai aktivitás pluszpontokért</li></ul>",
@@ -942,7 +942,7 @@ const DATA = {
     },
     {
       "id": "s885t0220g96w85",
-      "course": "LMS-AA1E",
+      "course": "IP-18AA1E",
       "teacher": "TE4CH3",
       "students": [
         "s70x7ob3ydb172x"

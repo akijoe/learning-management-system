@@ -54,8 +54,10 @@ import {
 } from "app/components/ui/dialog";
 import { toast } from "sonner";
 
-//burnt in api key for Google Gemini
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Google Gemini API key, from VITE_GEMINI_API_KEY (this code runs in the browser,
+// so only VITE_-prefixed variables are available, via import.meta.env)
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY ?? "");
+const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL ?? "gemini-flash-latest";
 
 async function fetchFileAsBase64(url: string) {
   try {
@@ -88,7 +90,7 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
       expand: "course",
     });
 
-    if (ai !== null) {
+    if (ai) {
       let fileList = [];
 
       for await (const file of record.files) {
@@ -137,7 +139,7 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
         };
 
         const model = genAI.getGenerativeModel({
-          model: "gemini-2.0-flash",
+          model: GEMINI_MODEL,
           generationConfig: {
             responseMimeType: "application/json",
             responseSchema: schema,
@@ -171,7 +173,7 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
 
         //gemini allows only 10 files :(
 
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
         const result = await model.generateContent([prompt, ...fileList]);
 

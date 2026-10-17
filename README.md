@@ -39,13 +39,27 @@ them into flashcards.
    ```bash
    cd canvas_client_react_router
    npm install
-   GEMINI_API_KEY=<your key> npm run dev   # http://localhost:5173
+   cp .env.example .env     # then put your Gemini API key in .env
+   npm run dev              # http://localhost:5173
    ```
-   The AI features need a Gemini API key; everything else works without it.
+
+### AI features (Google Gemini)
+
+The course summary and flashcard buttons call the Gemini API straight from the browser.
+
+1. Create a free API key at https://aistudio.google.com/apikey.
+2. Set it in `canvas_client_react_router/.env`:
+   ```
+   VITE_GEMINI_API_KEY=your-key
+   ```
+   Optionally set `VITE_GEMINI_MODEL` (default: `gemini-flash-latest`).
+3. Restart `npm run dev` — Vite reads `.env` only on start.
+
+Everything else works without a key. Because the key is bundled into the client, use a key restricted to the Gemini API (and to your domain, if deployed), and never commit `.env`.
 
 ### Demo data
 
-The demo users, grades and exams are fictional; the course materials in `pb_seed/` are sample lecture notes. Exam dates are set relative to the first start, so there are always upcoming exams.
+The demo users, grades and exams are fictional; the course materials in `pb_seed/` are ELTE IK lecture notes (each file names its authors). Exam dates are set relative to the first start, so there are always upcoming exams.
 
 | Role | Email | Password |
 |---|---|---|
