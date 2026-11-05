@@ -14,6 +14,20 @@ them into flashcards.
 - AI course summaries and flashcard generation (Google Gemini)
 - Role-based views for students, teachers and admins
 
+## Screenshots
+
+Course registration:
+
+![Course registration page listing the student's courses](docs/screenshots/course-registration.png)
+
+AI flashcards generated from the course materials:
+
+![A flashcard with its difficulty and question](docs/screenshots/ai-flashcard.png)
+
+Study progress:
+
+![Charts of completed credits, credits still required and credits by subject area](docs/screenshots/study-progress.jpg)
+
 ## Tech stack
 
 - **Client:** React, React Router 7, TypeScript, Tailwind CSS, shadcn/ui
