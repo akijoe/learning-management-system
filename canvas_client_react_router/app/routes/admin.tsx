@@ -1,5 +1,5 @@
 import React from "react";
-import pb from "./auth/pocketbase";
+import pb, { openProtectedFile } from "./auth/pocketbase";
 
 import {
   Table,
@@ -41,13 +41,9 @@ const fileTypes = ["PDF", "JPEG", "PNG"];
 
 const handleDiscUpdate = async (text, setText, course_instance_id) => {
   try {
-    let existing = await pb
+    await pb
       .collection("course_instance")
-      .getOne(course_instance_id);
-
-    existing.description = text;
-
-    await pb.collection("course_instance").update(course_instance_id, existing);
+      .update(course_instance_id, { description: text });
 
     toast("Sikeres módosítás.");
   } catch (err) {
@@ -84,11 +80,7 @@ const handleChange = async (file: File, course_instance_id: string) => {
 
 const handleDelete = async (f, id) => {
   try {
-    let record = await pb.collection("course_instance").getOne(id);
-
-    record.files.splice(record.files.indexOf(f), 1);
-
-    await pb.collection("course_instance").update(id, record);
+    await pb.collection("course_instance").update(id, { "files-": [f] });
 
     toast("Fájl sikeresen törölve");
   } catch (error) {
@@ -177,12 +169,12 @@ const Admin: React.FC = ({ loaderData }) => {
                         <TableCell className="font-medium">{f}</TableCell>
 
                         <TableCell>
-                          <a
-                            target="_blank"
-                            href={`http://127.0.0.1:8090/api/files/pbc_2244489498/${e.id}/${f}`}
+                          <button
+                            type="button"
+                            onClick={() => openProtectedFile(e, f)}
                           >
                             <ExternalLink />
-                          </a>
+                          </button>
                         </TableCell>
                         <TableCell>
                           <a

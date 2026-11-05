@@ -24,30 +24,10 @@ export default function CourseOptionsTable({
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const takeCourse = async (course_instance_id) => {
-    const courseInstance = await pb
-      .collection("course_instance")
-      .getOne(course_instance_id);
-
-    if (courseInstance.students.length == courseInstance.max_students) {
-      return -1;
-    }
-
-    if (courseInstance.students.includes(pb.authStore.record.id)) {
-      return -2;
-    }
-
-    let copyofCourseInstance = courseInstance;
-
-    courseInstance.students.push(pb.authStore.record.id);
-
-  
-    const updateMyCourses = await pb
-      .collection("course_instance")
-      .update(course_instance_id, copyofCourseInstance);
-
-    return 0;
-  };
+  const takeCourse = (course_instance_id) =>
+    pb.send(`/api/lms/course-instances/${course_instance_id}/enrollment`, {
+      method: "POST",
+    });
 
   useEffect(() => {
     const loadCourses = async () => {
@@ -92,23 +72,19 @@ export default function CourseOptionsTable({
                 <TableCell className="text-right">
                   <Button
                     onClick={async () => {
-                      const res = await takeCourse(c.id);
+                      try {
+                        await takeCourse(c.id);
 
-                      if (res == -1) {
-                        toast("Tárgyfelvétel sikertelen", {
-                          description: "A csoport betelt.",
-                        });
-                      } else if (res == -2) {
-                        toast("Tárgyfelvétel sikertelen", {
-                          description: "Már felvetted ezt a tárgyat.",
-                        });
-                      } else {
                         toast("Sikeres tárgyfelvétel", {
                           description: `A(z) ${c.expand.course.course_name} tárgyat felvetted ${c.expand.teacher.name}-hoz.`,
                           action: {
                             label: "Ugrás a felvett tárgyakhoz",
                             onClick: () => navigate("/courses"),
                           },
+                        });
+                      } catch (error) {
+                        toast("Tárgyfelvétel sikertelen", {
+                          description: (error as Error).message,
                         });
                       }
 

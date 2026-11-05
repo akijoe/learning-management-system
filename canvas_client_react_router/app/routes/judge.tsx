@@ -41,19 +41,15 @@ export default function Judge({ loaderData }) {
 
     const data = {
       student: student,
-      judge: pb.authStore.record.id,
       result: rating,
       comment: comment,
     };
 
     try {
-      const entry = await pb.collection("exam_results").create(data);
-
-      let exam = await pb.collection("exams").getOne(time);
-
-      exam.results.push(entry.id);
-
-      await pb.collection("exams").update(time, exam);
+      await pb.send(`/api/lms/exams/${time}/results`, {
+        method: "POST",
+        body: data,
+      });
 
       toast("Jegy sikeresen beírva");
 

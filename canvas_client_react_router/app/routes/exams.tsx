@@ -56,6 +56,8 @@ import {
 } from "app/components/ui/alert-dialog";
 import { toast } from "sonner";
 
+// Below, exam.expand.results only holds the logged in student's own results,
+// exam.results is everyone's.
 export async function clientLoader({ params }: Route.LoaderArgs) {
   const users_exams = await pb.collection("course_instance").getFullList({
     filter: `students ~ "${pb.authStore.record.id}"`,
@@ -82,13 +84,9 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
 }
 
 async function takeExam(id_of_exam) {
-  const one_record = await pb.collection("exams").getOne(id_of_exam);
-
-  let copyofrecord = one_record;
-
-  copyofrecord.participants.push(pb.authStore.record.id);
-
-  const record = await pb.collection("exams").update(id_of_exam, copyofrecord);
+  const one_record = await pb.send(`/api/lms/exams/${id_of_exam}/signup`, {
+    method: "POST",
+  });
 
   toast("Sikeres vizsgajelentkezés.", {
     description:
@@ -101,16 +99,7 @@ async function takeExam(id_of_exam) {
 }
 
 async function deleteExam(id_of_exam) {
-  const one_record = await pb.collection("exams").getOne(id_of_exam);
-
-  let copyofrecord = one_record;
-
-  copyofrecord.participants.splice(
-    copyofrecord.participants.indexOf(pb.authStore.record.id),
-    1
-  );
-
-  const record = await pb.collection("exams").update(id_of_exam, copyofrecord);
+  await pb.send(`/api/lms/exams/${id_of_exam}/signup`, { method: "DELETE" });
 
   toast("Vizsgajelentkezés törölve.");
 }
@@ -185,7 +174,7 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                     </HoverCardContent>
                   </HoverCard>
                 ) : e.expand.exams
-                    .filter((e) => e.results.length != 0)
+                    .filter((e) => e.expand?.results)
                     .filter((exam) => exam.expand.results[0].result > 1)
                     .length > 0 ? (
                   <HoverCard>
@@ -197,7 +186,7 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                     </HoverCardContent>
                   </HoverCard>
                 ) : e.expand.exams
-                    .filter((e) => e.results.length != 0)
+                    .filter((e) => e.expand?.results)
                     .filter((exam) => exam.expand.results[0].result == 1)
                     .length == e.exams_maximum_attempts ? (
                   <HoverCard>
@@ -233,7 +222,7 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                       ).length == 0 ||
                       currentlyTaking[e.id] !== "" ||
                       e.expand.exams
-                        .filter((e) => e.results.length != 0)
+                        .filter((e) => e.expand?.results)
                         .filter((exam) => exam.expand.results[0].result == 1)
                         .length == e.exams_maximum_attempts ||
                       e.expand.exams.filter(
@@ -253,7 +242,16 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                           [e.id]: true,
                         }));
 
-                        takeExam(value);
+                        takeExam(value).catch((error) => {
+                          toast("Sikertelen vizsgajelentkezés.", {
+                            description: error.message,
+                          });
+
+                          setCurrentlyTaking((items) => ({
+                            ...items,
+                            [e.id]: "",
+                          }));
+                        });
                       }
                     }}
                   >
@@ -322,7 +320,11 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                                   [e.id]: "",
                                 }));
 
-                                deleteExam(currentlyTaking[e.id]);
+                                deleteExam(currentlyTaking[e.id]).catch((error) =>
+                                  toast("Sikertelen törlés.", {
+                                    description: error.message,
+                                  })
+                                );
                               }}
                             >
                               Vizsgajelentkezés törlése
@@ -341,12 +343,12 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                 {
 
                   e.expand.exams
-                    .filter((e) => e.results.length != 0)
+                    .filter((e) => e.expand?.results)
                     .map((exam) => [
                       exam.time,
                       exam.expand.results[0].result,
                       exam.expand.results[0].comment,
-                      exam.expand.results[0].expand.judge.name,
+                      exam.expand.results[0].expand?.judge?.name,
                       exam.id,
                     ])
                     .map((res) => (
@@ -377,7 +379,7 @@ export default function Exams({ loaderData }: Route.ComponentProps) {
                   {
                     length:
                       e.exams_maximum_attempts -
-                      e.expand.exams.filter((e) => e.results.length != 0)
+                      e.expand.exams.filter((e) => e.expand?.results)
                         .length,
                   },
                   (_, i) => (
